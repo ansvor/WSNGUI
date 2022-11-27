@@ -250,7 +250,8 @@ class GameStage(Stage):
         port = 1
         bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
         bluetooth_module.connect((bd_addr, port))
-        byteObject = bytes(bluetooth_module.recv(25))
+        byteObject = bytes(bluetooth_module.recv(30))
+        print(byteObject)
         self.text = self.font.render(byteObject, True, BLACK)
         self.text_rect = self.text.get_rect(center=self.screen_rect.center)
         surface.fill(PINK)
@@ -258,14 +259,14 @@ class GameStage(Stage):
 
 
      
-    def create_objects(self):
-        self.font = pygame.font.Font(None, 30) 
-        #readValue(self) 
-        bd_addr = "00:20:12:08:69:35"
-        port = 1
-        bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
-        bluetooth_module.connect((bd_addr, port))
-        byteObject = bytes(bluetooth_module.recv(20))
+    # def create_objects(self):
+    #     self.font = pygame.font.Font(None, 30) 
+    #     #readValue(self) 
+    #     bd_addr = "00:20:12:08:69:35"
+    #     port = 1
+    #     bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+    #     bluetooth_module.connect((bd_addr, port))
+    #     byteObject = bytes(bluetooth_module.recv(75))
             # print(byteObject)
             # self.text = self.font.render(byteObject, True, BLACK)
             # self.text_rect = self.text.get_rect(center=self.screen_rect.center)
