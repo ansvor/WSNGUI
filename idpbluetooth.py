@@ -1,5 +1,6 @@
 import pygame
 import bluetooth
+import time
 
 #defining colors  
 
@@ -14,6 +15,18 @@ BLUE  = (  0,   0, 100)
 
 SCREEN_WIDTH  = 800
 SCREEN_HEIGHT = 600
+
+# def readValue(self):
+#         self.font = pygame.font.Font(None, 30) 
+#         #readValue() 
+#         bd_addr = "00:20:12:08:69:35"
+#         port = 1
+#         bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+#         bluetooth_module.connect((bd_addr, port))
+#         byteObject = bytes(bluetooth_module.recv(100))
+#         print(byteObject)
+#         self.text = self.font.render(byteObject, True, BLACK)
+#         self.text_rect = self.text.get_rect(center=self.screen_rect.center)
 
 
 #creating main class- user = player
@@ -230,32 +243,54 @@ class ExitStage(Stage):
 
 class GameStage(Stage):
 
-
-     def draw(self, surface):
+    def draw(self, surface):
+        self.font = pygame.font.Font(None, 30) 
+        #readValue(self) 
+        bd_addr = "00:20:12:08:69:35"
+        port = 1
+        bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+        bluetooth_module.connect((bd_addr, port))
+        byteObject = bytes(bluetooth_module.recv(25))
+        self.text = self.font.render(byteObject, True, BLACK)
+        self.text_rect = self.text.get_rect(center=self.screen_rect.center)
         surface.fill(PINK)
         surface.blit(self.text, self.text_rect)
 
+
      
-     def create_objects(self):
-        self.font = pygame.font.Font(None, 30)
-        #self.text = self.font.render("No Temperature Reading is Detected. Please check connectivity.", True, BLACK)
-        #self.text_rect = self.text.get_rect(center=self.screen_rect.center)
-
-
-        
+    def create_objects(self):
+        self.font = pygame.font.Font(None, 30) 
+        #readValue(self) 
         bd_addr = "00:20:12:08:69:35"
-
         port = 1
-
         bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
         bluetooth_module.connect((bd_addr, port))
+        byteObject = bytes(bluetooth_module.recv(20))
+            # print(byteObject)
+            # self.text = self.font.render(byteObject, True, BLACK)
+            # self.text_rect = self.text.get_rect(center=self.screen_rect.center)
 
-       
-         #self.text = self.font.render(bluetooth_module.recv(10), True, BLACK)
-        byteObject = bytes(bluetooth_module.recv(10000))
-        self.text = self.font.render(byteObject, True, BLACK)
-        self.text_rect = self.text.get_rect(center=self.screen_rect.center)
+
+
+
         
+        # while True:
+        #     try:
+        #         bd_addr = "00:20:12:08:69:35"
+        #         port = 1
+        #         bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+        #         bluetooth_module.connect((bd_addr, port))
+        #         while True:
+        #             self.font = pygame.font.Font(None, 30)
+        #             byteObject = bytes(bluetooth_module.recv(10000))
+        #             self.text = self.font.render(byteObject, True, BLACK)
+        #             self.text_rect = self.text.get_rect(center=self.screen_rect.center)
+        #             time.sleep(5)
+        #     except Exception as e:
+        #         print("ERROR: {}".format(e))
+        #         print("retrying in {} seconds".format(5))
+        #         bluetooth_module.close()
+        #         time.sleep(5)
         
 
 
@@ -327,27 +362,27 @@ class App():
 
         pygame.quit()
 
-    #def run(self):
+    # def run(self):
 
-#print("Performing BLE inquiry...")
-#nearby_devices = bluetooth.discover_devices(duration=8, lookup_names=True,
-                                            #flush_cache=True, lookup_class=False)
+    #     print("Performing BLE inquiry...")
+    # nearby_devices = bluetooth.discover_devices(duration=8, lookup_names=True,
+    #                                         flush_cache=True, lookup_class=False)
 
-#for addr, name in nearby_devices:
-  #  print(addr, name)
+    # for addr, name in nearby_devices:
+    #     print(addr, name)
 
-#
-#import bluetooth
 
-#bd_addr = "00:20:12:08:69:35"
+# import bluetooth
 
-#port = 1
+# bd_addr = "00:20:12:08:69:35"
 
-#bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
-#bluetooth_module.connect((bd_addr, port))
+# port = 1
 
-#while(True):
- #  print(bluetooth_module.recv(10))
+# bluetooth_module=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+# bluetooth_module.connect((bd_addr, port))
+
+# while(True):
+#   print(bluetooth_module.recv(10))
 
 
 #bluetooth_module.close()
